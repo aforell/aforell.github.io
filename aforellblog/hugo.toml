@@ -1,0 +1,4 @@
+baseURL = 'https://aforell.github.io/'
+languageCode = 'en-us'
+title = 'Alexander Forell Blog'
+theme="blist"
