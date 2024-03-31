@@ -9,11 +9,11 @@
     <lastBuildDate>Thu, 15 Jul 2021 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://aforell.github.io/en/tags/emoji/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Emoji Support</title>
-      <link>https://aforell.github.io/en/blog/emoji-support/</link>
+      <title>Emoji-Unterstützung</title>
+      <link>https://aforell.github.io/en/blogexamples/emoji-support/</link>
       <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>https://aforell.github.io/en/blog/emoji-support/</guid>
-      <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
+      <guid>https://aforell.github.io/en/blogexamples/emoji-support/</guid>
+      <description>&lt;p&gt;Emojis können in einem Hugo-Projekt auf verschiedene Weise aktiviert werden.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
