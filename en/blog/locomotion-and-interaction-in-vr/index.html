@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="/favicon.svg">
+
+  <title>
+  University Project: Locomotion and Interaction in VR - Alexander Forell Blog
+  </title>
+  <meta name="description" content="Documentation of a project for my IVAR class" />
+  <meta name="author" content="Alexander Forell" />
+  <meta name="generator" content="Hugo 0.120.4"><link
+    rel="stylesheet"
+    href="https://aforell.github.io/css/styles.min.b4e3071606fe76bbad88fad43217b5fd5c358a49a505950fe5da358a4049a514.css"
+    integrity="sha256-tOMHFgb+drutiPrUMhe1/Vw1ikmlBZUP5do1ikBJpRQ="
+  />
+  
+  
+
+  <meta property="og:title" content="University Project: Locomotion and Interaction in VR" />
+<meta property="og:description" content="Documentation of a project for my IVAR class" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aforell.github.io/en/blog/locomotion-and-interaction-in-vr/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2024-04-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-04-01T00:00:00+00:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="University Project: Locomotion and Interaction in VR"/>
+<meta name="twitter:description" content="Documentation of a project for my IVAR class"/>
+
+  <meta itemprop="name" content="University Project: Locomotion and Interaction in VR">
+<meta itemprop="description" content="Documentation of a project for my IVAR class"><meta itemprop="datePublished" content="2024-04-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2024-04-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="686">
+<meta itemprop="keywords" content="VR,Locomotion,Interaction,Virtual Reality,Unity,Unity 3D," />
+
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://aforell.github.io/en/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="/profile-picture.png" alt="Alexander Forell Blog" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="/en/blog">Blog</a></li>
+    
+    <li><a href="/en/blogexamples">Example Blog site</a></li>
+    
+    <li><a href="/en/page">Pages</a></li>
+    
+
+    
+
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="/ivar-project-thumbnail.jpg" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+    April 1, 2024
+  
+
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">University Project: Locomotion and Interaction in VR</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      Posted on 
+  
+    April 1, 2024
+  
+
+
+      
+        &nbsp;&bull;&nbsp;
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      4&nbsp;minutes
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      686&nbsp;words
+      
+        
+      
+    </h5>
+    
+
+    <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#introduction">Introduction</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#preview-of-the-finished-project">Preview of the finished project</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#the-idea">The Idea</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#the-modified-idea">The modified idea</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#implementation">Implementation</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#locomotion">Locomotion</a>
+        
+
+        
+        </li><li>
+        <a href="#interaction">Interaction</a>
+        
+
+        
+        </li><li>
+        <a href="#assets">Assets</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#evaluation">Evaluation</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#implementing-feedback-">(Implementing Feedback) ?</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#my-takeaways">My Takeaways</a>
+        
+
+        
+        </li><li>
+        <a href="#how-to-play">How to play</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#github">GitHub</a>
+        
+
+        
+        </li><li>
+        <a href="#controls">Controls</a>
+        </li></ul>
+    </li></ul>
+  </details>
+
+    <br>
+<h1 id="introduction">Introduction</h1>
+<p>This project was part of the &ldquo;Interaction in Virtual and Augmented Reality&rdquo; class, I took in the winter semester 2023/24 at TU Darmstadt. The goal of the project was to design, implement and evaluate a locomotion and interaction technique for virtual reality. It was highly encouraged to be creative and to have the same metaphor for locomotion and interaction.</p>
+<p>For the locomotion technique we were simply tasked with coming up with a way for the user to get around a 3D space. For the interaction part, the user should be able to select objects in 3D and change their position and rotation.</p>
+<p>To aid us in our implementation, we were given a unity project which contained a 3D environment with a parkour and an example locomotion and interaction technique. The parkour consists of a road that winds in different ways, and which has different altitudes. Additionally, there are multiple coins for the user to collect. This is to test the capabilities of our future locomotion technique. For testing our interaction technique, there are three checkpoints along the road, where the user has to position and orient a t-shaped object in a specific way.</p>
+<p>The unity project of the parkour is available <a href="https://github.com/wenjietseng/VR-locomotion-parkour" target="_blank" rel="noopener">here</a>
+.</p>
+<p><img src="/parkour-scene.jpg" alt="The Parkour"></p>
+<h2 id="preview-of-the-finished-project">Preview of the finished project</h2>
+<p>Before I go into detail about the development process of this project you can look at the GitHub project here (TODO: get GitHub link) and see a demo video of me doing the parkour with my implemented locomotion and interaction technique here. (TODO: get video of me playing the parkour)</p>
+<h1 id="the-idea">The Idea</h1>
+<p>While brainstorming, my ideas quickly revolved around some sort of rope pulling mechanic. Some examples were:</p>
+<ul>
+<li>Fishing rod: You would throw your hook and instead of reeling in the hook, you would pull yourself towards it.</li>
+<li>Lasso: You would swing and throw a lasso and pull yourself along the thrown rope.</li>
+<li>Bow: You would shoot an arrow attached to a rope. Then you would pull yourself along the rope.</li>
+</ul>
+<p>In the end I landed on the idea of throwing a grappling hook and then pulling yourself towards it. As I wanted to combine the locomotion and interaction in one metaphor, I had to modify the idea. For the interaction part you would be able to throw the hook at objects and then pull the objects towards yourself.</p>
+<p><img src="/hook-rope-idea.jpg" alt="Hook with rope"></p>
+<p>This was the basic idea of what I wanted to implement, but when thinking about the limitations of the idea, it became obvious that with this interaction technique, it would be tedious to position and orient an object in a specific way.</p>
+<p>For example, if you just want to manipulate the position of an object, you would have to throw your hook at it, which is rather imprecise. There is no way for small adjustments. If you miss, you have to throw the hook again. Then you can also only move the object along the rope, so if you want to move the object perpendicular to the rope, you would have to first position yourself in the right spot and then pull the object.</p>
+<h2 id="the-modified-idea">The modified idea</h2>
+<p><img src="/pole-vault.jpg" alt="Pole Vault"></p>
+<p>The modified idea was inspired by pole vaulting, a sport where athletes jump over a high bar, using a long pole to help lift themselves up. With this idea you could still throw a hook with a rope attached and pull yourself towards it or pull objects towards yourself. But now you could also turn your rope rigid and therefore make a stick out of it.</p>
+<p>For locomotion you would then be able to push the stick into the ground and by that, lift yourself up. For interaction you would be able to lift distant objects that are attached to the stick and spin it around to rotate the objects.</p>
+<p>With this rigid pole you would be able to make small adjustments after throwing the rope, manipulate objects at a distance and introduce verticality to the locomotion and interaction.</p>
+<h1 id="implementation">Implementation</h1>
+<h2 id="locomotion">Locomotion</h2>
+<h2 id="interaction">Interaction</h2>
+<h2 id="assets">Assets</h2>
+<p>I used the following assets in my project:</p>
+<ul>
+<li><a href="https://skfb.ly/6DvAF" target="_blank" rel="noopener">Grappling hook model</a>
+</li>
+<li><a href="https://mixkit.co/free-sound-effects/click/" target="_blank" rel="noopener">Options button sound</a>
+</li>
+</ul>
+<h1 id="evaluation">Evaluation</h1>
+<h2 id="implementing-feedback-">(Implementing Feedback) ?</h2>
+<h1 id="my-takeaways">My Takeaways</h1>
+<h1 id="how-to-play">How to play</h1>
+<h2 id="github">GitHub</h2>
+<h2 id="controls">Controls</h2>
+<ul>
+<li>have fun :)</li>
+</ul>
+
+  </article>
+<div class="px-2 mb-2">
+  
+  <script src="https://giscus.app/client.js"
+    data-repo=""
+    data-repo-id=""
+    data-category=""
+    data-category-id=""
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+  </script>
+  
+</div>
+<div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2">Follow me</div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href="https://www.linkedin.com/in/alexander-forell-a891ab232/"
+          target="_blank"
+          rel="noopener"
+          aria-label="LinkedIn"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+            <line x1="8" y1="11" x2="8" y2="16" />
+            <line x1="8" y1="8" x2="8" y2="8.01" />
+            <line x1="12" y1="16" x2="12" y2="11" />
+            <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href="https://github.com/aforell"
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+            />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href="https://hyperbotzz.itch.io/"
+          target="_blank"
+          rel="noopener"
+          aria-label="YouTube"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-brand-youtube"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="12" cy="12" r="9" />
+            <path d="M10 9l5 3l-5 3z" />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2024 - Alexander Forell · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+
+
+
+
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

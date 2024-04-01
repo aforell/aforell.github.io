@@ -6,8 +6,16 @@
     <description>Recent content on Alexander Forell Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 01 Apr 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://aforell.github.io/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>University Project: Locomotion and Interaction in VR</title>
+      <link>https://aforell.github.io/en/blog/locomotion-and-interaction-in-vr/</link>
+      <pubDate>Mon, 01 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>https://aforell.github.io/en/blog/locomotion-and-interaction-in-vr/</guid>
+      <description>Introduction This project was part of the &amp;ldquo;Interaction in Virtual and Augmented Reality&amp;rdquo; class, I took in the winter semester 2023/24 at TU Darmstadt. The goal of the project was to design, implement and evaluate a locomotion and interaction technique for virtual reality. It was highly encouraged to be creative and to have the same metaphor for locomotion and interaction.
+For the locomotion technique we were simply tasked with coming up with a way for the user to get around a 3D space.</description>
+    </item>
     <item>
       <title>About Me</title>
       <link>https://aforell.github.io/en/page/about/</link>
