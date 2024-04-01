@@ -33,7 +33,7 @@
   <meta itemprop="name" content="University Project: Locomotion and Interaction in VR">
 <meta itemprop="description" content="Documentation of a project for my IVAR class"><meta itemprop="datePublished" content="2024-04-01T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2024-04-01T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2048">
+<meta itemprop="wordCount" content="2523">
 <meta itemprop="keywords" content="VR,Locomotion,Interaction,Virtual Reality,Unity,Unity 3D," />
 
   
@@ -133,7 +133,7 @@
         <circle cx="12" cy="12" r="9" />
         <polyline points="12 7 12 12 15 15" />
       </svg>
-      10&nbsp;minutes
+      12&nbsp;minutes
       &nbsp;&bull;
       <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -143,7 +143,7 @@
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      2048&nbsp;words
+      2523&nbsp;words
       
         
       
@@ -193,12 +193,31 @@
 
         
         <ul>
+            <ul>
             <li>
+        <a href="#different-modes">Different modes</a>
+        
+
+        
+        </li></ul>
+          <li>
         <a href="#locomotion">Locomotion</a>
         
 
         
+        <ul>
+            <li>
+        <a href="#non-rigid-locomotion">Non-rigid locomotion</a>
+        
+
+        
         </li><li>
+        <a href="#rigid-locomotion">Rigid locomotion</a>
+        
+
+        
+        </li></ul>
+      </li><li>
         <a href="#interaction">Interaction</a>
         
 
@@ -291,10 +310,25 @@
 <p>After setting up an XR Origin I imported a grappling hook model from <a href="https://skfb.ly/6DvAF" target="_blank" rel="noopener">Sketchfab</a>
  and started setting up basic grab mechanics. For this, I had to create an XR Interaction Manager in the scene and give each of the player hand objects a sphere trigger collider and an XR Direct Interactor script. I also gave the grappling hook 2 box colliders to estimate it’s shape, a rigid body and an XR Grab Interactable script. There I set “Throw on detach” to true and “Throw velocity scale” to 5. With this I could already grab the hook and throw it away.</p>
 <p>The next part was rendering a rope from the player to the hook. For this I created a rope object with a Rope.cs script. This script has a reference to an attachment point object as a child of the player and an attachment point as a child of the hook. I then use a Line Renderer component to draw a line between these two points. This needs to be done every frame as both attachment points move over time and the rope should reflect that.</p>
-<p>While trying to add collisions to my rope I run into my first big problem. Because the rope changes every frame, its collider should also change every frame. I generate the new mesh for the rope collider by using the LineRenderer.BakeMesh() function. The problem now occurs when I try to grab the rope. For grabbing I need the OnTriggerEnter() and OnTriggerExit() hooks to detect whether  a hand is in contact with the rope or not. Assume in one frame the OnTriggerEnter() event fires because the hand collides with the rope. What happens in the next frame? The OnTrigger() event fires again. Why? Since each frame the rope is getting a new mesh, this counts as a new collision as the hand detected a collision with a new mesh. This also means that OnTriggerExit() never gets called, because the mesh of the old collision doesn’t exist anymore. So how can I detect if a hand is currently touching the rope?</p>
-<p>My solution: Implement a timer that ticks up every frame. Only at an OnTriggerEnter() event does the timer reset back to zero. I can now test if my timer is bigger than a threshold. If it is bigger, that means the hand is not colliding with the rope, if it is smaller, that means the hand is colliding with the rope.</p>
 <p><img src="/GrappleHookThrowing.gif" alt="Throwing the hook with a rope attached"></p>
+<p>While trying to add collisions to my rope I run into my first big problem. Because the rope changes every frame, its collider should also change every frame. I generate the new mesh for the rope collider by using the LineRenderer.BakeMesh() function. The problem now occurs when I try to grab the rope. For grabbing I need the OnTriggerEnter() and OnTriggerExit() hooks to detect whether  a hand is in contact with the rope or not. Assume in one frame the OnTriggerEnter() event fires because the hand collides with the rope. What happens in the next frame? The OnTrigger() event fires again. Why? Since each frame the rope is getting a new mesh, this counts as a new collision as the hand detected a collision with a new mesh. This also means that OnTriggerExit() never gets called, because the mesh of the old collision doesn’t exist anymore. So how can I detect if a hand is currently touching the rope?</p>
+<p>My solution: Implement a timer that ticks up every frame and tracks the time since the last trigger enter. Only at a trigger enter event does the timer reset back to zero. I can now test if my timer is bigger than a threshold. If it is bigger, that means the hand is not colliding with the rope, if it is smaller, that means the hand is colliding with the rope.</p>
+<p>When grabbing the rope, it should also look like the rope is attached to the hand that grabbed the rope. For this each frame I add the attached hand position to the line renderer between the player attachment point and the hook attachment point. This is easy enough if you grab the rope with only one hand. When you grab it with two hands, you must determine and remember which hand is in front of the other hand to set the correct sequence of points inside the line renderer.</p>
+<h3 id="different-modes">Different modes</h3>
+<p>To implement my idea, I had to differentiate between different modes of controlling the hook. On the one hand I want to move myself in a non-rigid mode where the rope is flexible, and I pull myself along it. I also want a rigid mode where the rope is rigid, and I can move myself by pushing the stick into the ground. On the other hand, I want a non-rigid mode where I can pull objects towards myself and a rigid mode where the objects are attached to a stick, like roasting marshmallows over a fire.</p>
+<p>To implement these four different control modes I have two state variables: isRigidMode switches the control methods of the hook from non-rigid to rigid and isObjectMode switches between locomotion and interaction.</p>
+<p>The player can switch the rigid mode by pressing the left trigger on the controller. To visualize this behavior change, the rope changes its color from brown to grey when activating rigid mode. They can also switch the object mode by pressing the right trigger on the controller. This is visualized by having red orbs around the hook in object mode and no orbs in player mode.</p>
 <h2 id="locomotion">Locomotion</h2>
+<h3 id="non-rigid-locomotion">Non-rigid locomotion</h3>
+<p>For the locomotion in non-rigid mode, I calculate the movement of a hand that is attached to the rope by subtracting the current hand position from the position of the last frame and projecting the resulting vector on the direction of the rope.</p>
+<p><img src="/non-rigid-hand-movement-code.jpg" alt="Non-rigid hand movement code"></p>
+<p>This movement vector is then applied to the player’s character controller component. I also multiply a pull speed to the movement vector because otherwise the player could only move as fast as they could swing their arms.</p>
+<p><img src="/non_rigid_locomotion.gif" alt="Non-rigid locomotion"></p>
+<h3 id="rigid-locomotion">Rigid locomotion</h3>
+<p>For rigid locomotion, I want to calculate the position I would get if I went the current length of the rope from the hook in the direction of the vector between my hands. I then want to move the player to that goal direction. This creates the illusion of pushing the stick into the ground and lifting yourself up through it.</p>
+<p><img src="/rigid-movement-code.jpg" alt="Rigid movement code"></p>
+<p>I don’t instantly move the player to the goal position but only move them with slightly dampened movement speed to smooth over the movement. Otherwise, it feels like teleporting when you move your hands quickly.</p>
+<p><img src="/rigid_locomotion.gif" alt="Rigid locomotion"></p>
 <h2 id="interaction">Interaction</h2>
 <h2 id="assets">Assets</h2>
 <p>I used the following assets in my project:</p>
