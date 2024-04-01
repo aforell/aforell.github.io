@@ -33,7 +33,7 @@
   <meta itemprop="name" content="University Project: Locomotion and Interaction in VR">
 <meta itemprop="description" content="Documentation of a project for my IVAR class"><meta itemprop="datePublished" content="2024-04-01T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2024-04-01T00:00:00+00:00" />
-<meta itemprop="wordCount" content="686">
+<meta itemprop="wordCount" content="1480">
 <meta itemprop="keywords" content="VR,Locomotion,Interaction,Virtual Reality,Unity,Unity 3D," />
 
   
@@ -133,7 +133,7 @@
         <circle cx="12" cy="12" r="9" />
         <polyline points="12 7 12 12 15 15" />
       </svg>
-      4&nbsp;minutes
+      7&nbsp;minutes
       &nbsp;&bull;
       <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -143,7 +143,7 @@
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      686&nbsp;words
+      1480&nbsp;words
       
         
       
@@ -216,7 +216,12 @@
         
         <ul>
             <li>
-        <a href="#implementing-feedback-">(Implementing Feedback) ?</a>
+        <a href="#the-results">The results</a>
+        
+
+        
+        </li><li>
+        <a href="#future-work">Future work</a>
         
 
         
@@ -233,12 +238,17 @@
         
         <ul>
             <li>
-        <a href="#github">GitHub</a>
+        <a href="#download-the-apk">Download the .apk</a>
         
 
         
         </li><li>
-        <a href="#controls">Controls</a>
+        <a href="#see-the-code">See the code</a>
+        
+
+        
+        </li><li>
+        <a href="#tutorial">Tutorial</a>
         </li></ul>
     </li></ul>
   </details>
@@ -252,7 +262,8 @@
 .</p>
 <p><img src="/parkour-scene.jpg" alt="The Parkour"></p>
 <h2 id="preview-of-the-finished-project">Preview of the finished project</h2>
-<p>Before I go into detail about the development process of this project you can look at the GitHub project here (TODO: get GitHub link) and see a demo video of me doing the parkour with my implemented locomotion and interaction technique here. (TODO: get video of me playing the parkour)</p>
+<p>Before I go into detail about the development process of this project you can look at the GitHub project <a href="https://github.com/aforell/locomotion-and-interaction-in-vr" target="_blank" rel="noopener">here</a>
+  and see a demo video of me doing the parkour with my implemented locomotion and interaction technique here. (TODO: get video of me playing the parkour)</p>
 <h1 id="the-idea">The Idea</h1>
 <p>While brainstorming, my ideas quickly revolved around some sort of rope pulling mechanic. Some examples were:</p>
 <ul>
@@ -281,11 +292,53 @@
 </li>
 </ul>
 <h1 id="evaluation">Evaluation</h1>
-<h2 id="implementing-feedback-">(Implementing Feedback) ?</h2>
+<p>For the evaluation I was tasked to conduct a (very) small user study with 2 people and myself. Although the group size was small, the study gave valuable feedback for my project. At the start of the study, I gave each participant an introduction to VR by showing them the <a href="https://www.oculus.com/deeplink/?action=view&amp;path=/app/1863547050392688&amp;ref=oculus_desktop" target="_blank" rel="noopener">Meta First Steps in VR App</a>
+. I thought this would increase their familiarity with VR in general, as both participants have rarely played with VR before. After this, I gave the participants a few minutes to play around with my locomotion and interaction technique, before having them complete the parkour.</p>
+<p>The participants were tasked to complete the parkour as fast as possible, to collect as many coins as possible and to be as accurate as possible in the interaction part. I then noted comments they had during play and interviewed them afterwards.</p>
+<p>The questions from the interview:</p>
+<ul>
+<li>&ldquo;On a scale from 1 to 10, how much motion sickness do you perceive right now?&rdquo; (1 lowest 10 highest)</li>
+<li>&ldquo;On a scale from 1 to 10 how present did you feel in the virtual world?&rdquo; (1 lowest 10 highest)</li>
+<li>&ldquo;On a scale from 1 to 10, how much fun did you have during the locomotion task?&rdquo; (1 lowest 10 highest)</li>
+<li>&ldquo;On a scale from 1 to 10, how much fun did you have during the interaction task?&rdquo; (1 lowest 10 highest)</li>
+<li>&ldquo;On a scale from 1 to 10, how intuitive were the controls?&rdquo; (1 lowest 10 highest)</li>
+</ul>
+<p>Besides the interview some other data was also collected during play:</p>
+<ul>
+<li>Average time per round (average over all three participants)</li>
+<li>Average accuracy per round (average over all three participants)</li>
+<li>Average amount of finished rounds (average over all three participants)</li>
+</ul>
+<h2 id="the-results">The results</h2>
+<p><img src="/eval-stats.jpg" alt="Evaluation Results"></p>
+<p>First, you can clearly see the difference in the performance for me (Developer) and the other participants. Naturally, I got a better combined time and accuracy than the others, since I had so much more experience with the game from developing it. Secondly, you can see the average time overall for the parkour is 15.16 minutes and the average accuracy (collected coins) is only 57%. One Participant got frustrated by the interaction task and then just went for the fastest completion time without going for the coins at all. The other participant went for the coins but then took too long to finish the parkour.</p>
+<p>During the play test, it became clear that the task was not that intuitive. Handling 4 different control modes was just too much to learn at once. It was also obvious that the locomotion was much more enjoyable than the interaction parts. This is also backed by the interviews. It took the participants a long time to learn the controls but once they figured them out, they had fun with the locomotion technique. The interaction technique was still not well received. Most of the time, players would just pull the objects towards themselves and then rotate the object in hand.</p>
+<p>The implementation of the vignette was valuable, as it helped both participants with their motion sickness. One participant rated his motion sickness 7 and after using the vignette for a while it reduced to 4.</p>
+<p>Sometimes it was hard to know which exact mode the player was in, so the visibility of the modes could be improved. Also, sometimes the hook would get lost so one participant wished for a button to teleport the hook back to the player.</p>
+<h2 id="future-work">Future work</h2>
+<p>A button to teleport the hook back to the player would ruin the immersion in my opinion but might decrease some frustrations players had with the task.</p>
+<p>Increasing the visibility of the different modes is definitely something I would like to implement. For this I will change the color of the controllers based on the active mode and attach some red spheres to one controller (like on the hook) when object mode is active.</p>
+<p>A better tutorial will probably decrease the frustrations players had with learning the mechanics. I tested this on another player that wasn’t part of the user study. I introduced the different modes to him only after he mastered the previous mode. The result was that he had more fun and much more control over what he was doing than the other two players of the user study.</p>
 <h1 id="my-takeaways">My Takeaways</h1>
+<ol>
+<li>I can now prototype ideas for VR applications in Unity.</li>
+<li>I now understand some of the difficulties when designing locomotion and interaction techniques for a VR application.</li>
+<li>I know the importance of early testing. In the future I will give my applications to test users more often and earlier in the development process.</li>
+<li>I know the importance of good time management.</li>
+</ol>
 <h1 id="how-to-play">How to play</h1>
-<h2 id="github">GitHub</h2>
-<h2 id="controls">Controls</h2>
+<h2 id="download-the-apk">Download the .apk</h2>
+<p>Download the .apk <a href="/Alex_GrapplingHook.apk">here</a>
+.</p>
+<h2 id="see-the-code">See the code</h2>
+<ol>
+<li>See the <a href="https://github.com/aforell/locomotion-and-interaction-in-vr" target="_blank" rel="noopener">GitHub repository</a>
+</li>
+<li>Take a pull</li>
+<li>Open the project in Unity 2021.3.32f1</li>
+</ol>
+<h2 id="tutorial">Tutorial</h2>
+<p>(TODO Tutorial text)</p>
 <ul>
 <li>have fun :)</li>
 </ul>
