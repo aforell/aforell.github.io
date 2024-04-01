@@ -33,7 +33,7 @@
   <meta itemprop="name" content="University Project: Locomotion and Interaction in VR">
 <meta itemprop="description" content="Documentation of a project for my IVAR class"><meta itemprop="datePublished" content="2024-04-01T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2024-04-01T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1480">
+<meta itemprop="wordCount" content="2048">
 <meta itemprop="keywords" content="VR,Locomotion,Interaction,Virtual Reality,Unity,Unity 3D," />
 
   
@@ -133,7 +133,7 @@
         <circle cx="12" cy="12" r="9" />
         <polyline points="12 7 12 12 15 15" />
       </svg>
-      7&nbsp;minutes
+      10&nbsp;minutes
       &nbsp;&bull;
       <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -143,7 +143,7 @@
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      1480&nbsp;words
+      2048&nbsp;words
       
         
       
@@ -263,7 +263,13 @@
 <p><img src="/parkour-scene.jpg" alt="The Parkour"></p>
 <h2 id="preview-of-the-finished-project">Preview of the finished project</h2>
 <p>Before I go into detail about the development process of this project you can look at the GitHub project <a href="https://github.com/aforell/locomotion-and-interaction-in-vr" target="_blank" rel="noopener">here</a>
-  and see a demo video of me doing the parkour with my implemented locomotion and interaction technique here. (TODO: get video of me playing the parkour)</p>
+  and see a demo video of me doing the parkour with my implemented locomotion and interaction technique here.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/hL_C9sl6sIk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>(Unfortunately at the time of the recording, there was still a bug that prevented the third checkpoint from triggering, which means the last lap doesn&rsquo;t have any coins in it.)</p>
 <h1 id="the-idea">The Idea</h1>
 <p>While brainstorming, my ideas quickly revolved around some sort of rope pulling mechanic. Some examples were:</p>
 <ul>
@@ -281,6 +287,13 @@
 <p>For locomotion you would then be able to push the stick into the ground and by that, lift yourself up. For interaction you would be able to lift distant objects that are attached to the stick and spin it around to rotate the objects.</p>
 <p>With this rigid pole you would be able to make small adjustments after throwing the rope, manipulate objects at a distance and introduce verticality to the locomotion and interaction.</p>
 <h1 id="implementation">Implementation</h1>
+<p>I started by implementing the basics. I tried using the oculus integration to manage my virtual reality session in Unity, as this was given in the project template. This felt rather restrictive to me, so I switched to using Unity’s XR Core framework.</p>
+<p>After setting up an XR Origin I imported a grappling hook model from <a href="https://skfb.ly/6DvAF" target="_blank" rel="noopener">Sketchfab</a>
+ and started setting up basic grab mechanics. For this, I had to create an XR Interaction Manager in the scene and give each of the player hand objects a sphere trigger collider and an XR Direct Interactor script. I also gave the grappling hook 2 box colliders to estimate it’s shape, a rigid body and an XR Grab Interactable script. There I set “Throw on detach” to true and “Throw velocity scale” to 5. With this I could already grab the hook and throw it away.</p>
+<p>The next part was rendering a rope from the player to the hook. For this I created a rope object with a Rope.cs script. This script has a reference to an attachment point object as a child of the player and an attachment point as a child of the hook. I then use a Line Renderer component to draw a line between these two points. This needs to be done every frame as both attachment points move over time and the rope should reflect that.</p>
+<p>While trying to add collisions to my rope I run into my first big problem. Because the rope changes every frame, its collider should also change every frame. I generate the new mesh for the rope collider by using the LineRenderer.BakeMesh() function. The problem now occurs when I try to grab the rope. For grabbing I need the OnTriggerEnter() and OnTriggerExit() hooks to detect whether  a hand is in contact with the rope or not. Assume in one frame the OnTriggerEnter() event fires because the hand collides with the rope. What happens in the next frame? The OnTrigger() event fires again. Why? Since each frame the rope is getting a new mesh, this counts as a new collision as the hand detected a collision with a new mesh. This also means that OnTriggerExit() never gets called, because the mesh of the old collision doesn’t exist anymore. So how can I detect if a hand is currently touching the rope?</p>
+<p>My solution: Implement a timer that ticks up every frame. Only at an OnTriggerEnter() event does the timer reset back to zero. I can now test if my timer is bigger than a threshold. If it is bigger, that means the hand is not colliding with the rope, if it is smaller, that means the hand is colliding with the rope.</p>
+<p><img src="/GrappleHookThrowing.gif" alt="Throwing the hook with a rope attached"></p>
 <h2 id="locomotion">Locomotion</h2>
 <h2 id="interaction">Interaction</h2>
 <h2 id="assets">Assets</h2>
@@ -338,8 +351,18 @@
 <li>Open the project in Unity 2021.3.32f1</li>
 </ol>
 <h2 id="tutorial">Tutorial</h2>
-<p>(TODO Tutorial text)</p>
 <ul>
+<li><b>Left trigger</b> to switch between rigid / non rigid mode</li>
+<li><b>Right trigger</b>  to switch between object grabbing mode and player movement mode</li>
+<li>Push down on a <b>joystick</b> to open the options menu</li>
+</ul>
+<p><b>Basic Movement</b></p>
+<ul>
+<li>Grab the rope or the hook with the grab button</li>
+<li>Do a pull motion while holding on to the rope to move</li>
+<li>In rigid mode there is a difference when you grab with one hand or when you grab with two hands</li>
+<li>grabbing with two hands will let you move the stick around you</li>
+<li>grabbing with one hand will let move along the axis of the stick</li>
 <li>have fun :)</li>
 </ul>
 
