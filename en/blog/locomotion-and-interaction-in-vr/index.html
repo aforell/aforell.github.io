@@ -33,7 +33,7 @@
   <meta itemprop="name" content="University Project: Locomotion and Interaction in VR">
 <meta itemprop="description" content="Documentation of a project for my IVAR class"><meta itemprop="datePublished" content="2024-04-01T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2024-04-01T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2523">
+<meta itemprop="wordCount" content="3005">
 <meta itemprop="keywords" content="VR,Locomotion,Interaction,Virtual Reality,Unity,Unity 3D," />
 
   
@@ -133,7 +133,7 @@
         <circle cx="12" cy="12" r="9" />
         <polyline points="12 7 12 12 15 15" />
       </svg>
-      12&nbsp;minutes
+      15&nbsp;minutes
       &nbsp;&bull;
       <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -143,7 +143,7 @@
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      2523&nbsp;words
+      3005&nbsp;words
       
         
       
@@ -219,6 +219,33 @@
         </li></ul>
       </li><li>
         <a href="#interaction">Interaction</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#non-rigid-interaction">Non-rigid interaction</a>
+        
+
+        
+        </li><li>
+        <a href="#rigid-interaction">Rigid interaction</a>
+        
+
+        
+        </li><li>
+        <a href="#one-handed-interaction-and-locomotion">One handed interaction and locomotion</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#options">Options</a>
+        
+
+        
+        </li><li>
+        <a href="#project-management">Project Management</a>
         
 
         
@@ -323,6 +350,7 @@
 <p>For the locomotion in non-rigid mode, I calculate the movement of a hand that is attached to the rope by subtracting the current hand position from the position of the last frame and projecting the resulting vector on the direction of the rope.</p>
 <p><img src="/non-rigid-hand-movement-code.jpg" alt="Non-rigid hand movement code"></p>
 <p>This movement vector is then applied to the player’s character controller component. I also multiply a pull speed to the movement vector because otherwise the player could only move as fast as they could swing their arms.</p>
+<p>This simple implementation has a drawback when you stand on top of the hook. If you then push the rope, you can fly away because the move vector would then point directly up. You would expect something like this from rigid mode but not for non-rigid mode. So, for this non-rigid edge case I remove all movement in y-direction when the angle is too steep.</p>
 <p><img src="/non_rigid_locomotion.gif" alt="Non-rigid locomotion"></p>
 <h3 id="rigid-locomotion">Rigid locomotion</h3>
 <p>For rigid locomotion, I want to calculate the position I would get if I went the current length of the rope from the hook in the direction of the vector between my hands. I then want to move the player to that goal direction. This creates the illusion of pushing the stick into the ground and lifting yourself up through it.</p>
@@ -330,6 +358,29 @@
 <p>I don’t instantly move the player to the goal position but only move them with slightly dampened movement speed to smooth over the movement. Otherwise, it feels like teleporting when you move your hands quickly.</p>
 <p><img src="/rigid_locomotion.gif" alt="Rigid locomotion"></p>
 <h2 id="interaction">Interaction</h2>
+<p>Every movable object has the MovableObject component. This script handles logic for when the hook collides with a movable object while in interaction mode. The object then attaches to the hook by setting its parent to be the hook. When the player presses the right trigger while objects are attached to the hook, the just get detached and the hook stays in object mode. To prevent immediate reattachment each object has a small cooldown timer after the detachment where the hook can’t attach again. This felt the best, as you would not get stuck trying to detach objects.</p>
+<h3 id="non-rigid-interaction">Non-rigid interaction</h3>
+<p>Non-rigid interaction works just like non-rigid locomotion. The difference is that the sign of the movement vector gets flipped and the movement is not applied to the player but to the hook with all its attached objects.</p>
+<p><img src="/non_rigid_interaction.gif" alt="Non-rigid interaction"></p>
+<h3 id="rigid-interaction">Rigid interaction</h3>
+<p>Rigid interaction is like rigid locomotion. The difference is that the goal direction is flipped, the goal position is calculated from the hands as a base and the movement is applied to the hook.</p>
+<p>To increase the accuracy of the rotation, in rigid interaction mode the rotation of the hook gets set to the rotation of the front hand. This allows for more precise rotations.</p>
+<p><img src="/rigid_interaction.gif" alt="Non-rigid interaction"></p>
+<h3 id="one-handed-interaction-and-locomotion">One handed interaction and locomotion</h3>
+<p>When using only one hand the rigid mode behaves like the non-rigid mode but without gravity. This allows for precise movement along the rope.</p>
+<p><img src="/rigid_interaction_pull_push.gif" alt="Rigid interaction one-handed">
+<img src="/rigid_locomotion_pull_push.gif" alt="Rigid locomotion one-handed"></p>
+<h2 id="options">Options</h2>
+<p>I wanted to add a vignette to my project because I had my trouble with cyber sickness in the past and vignettes are a simple way to reduce it. I used <a href="https://www.youtube.com/watch?v=9Q6mEmZEoa4&amp;ab_channel=ValemTutorials" target="_blank" rel="noopener">this Tutorial</a>
+ to implement the tunneling vignette.</p>
+<p>I knew that many people don’t like having a vignette so I made an options menu in which you can toggle on or off the vignette. You can open it by pressing the left stick. The buttons that appear on the options menu are inspired by <a href="https://www.youtube.com/watch?v=lPPa9y_czlE&amp;ab_channel=RealaryVR" target="_blank" rel="noopener">this tutorial</a>
+.</p>
+<p>A nice trick I found when working with sound, is to randomize its pitch every time it plays. This can be around a 10% higher to 10% lower pitch. This removes much of the repetition of a sound and makes it much more satisfying to listen to the same sound over and over again.</p>
+<p><img src="/sound-code.jpg" alt="Pitch randomizer code"></p>
+<h2 id="project-management">Project Management</h2>
+<p>I used <a href="https://trello.com/" target="_blank" rel="noopener">Trello</a>
+ to organize and prioritize my workload. This board really made managing my time easier as I would focus on more important tasks first and then when I had time left, I could work on less important tasks.</p>
+<p><img src="/trello-screenshot.jpg" alt="Trello screenshot"></p>
 <h2 id="assets">Assets</h2>
 <p>I used the following assets in my project:</p>
 <ul>
